@@ -1,0 +1,71 @@
+/* Lógico_2: */
+
+CREATE TABLE Funcionarios (
+    ID_Funcionario int PRIMARY KEY,
+    Nome varchar,
+    Senha varchar,
+    Login varchar
+);
+
+CREATE TABLE Reserva (
+    ID_Reserva int PRIMARY KEY,
+    Data_disponivel date,
+    Data_ocupado date,
+    Valor float,
+    fk_Funcionarios_ID_Funcionario int,
+    fk_Hospede_CPF int,
+    fk_Hospedagem_ID_Hospedagem int
+);
+
+CREATE TABLE Hospede (
+    CPF int PRIMARY KEY,
+    StatusReserva boolean,
+    Nome varchar,
+    Quarto int,
+    Vagas int,
+    email varchar,
+    telefone varchar
+);
+
+CREATE TABLE Hospedagem (
+    ID_Hospedagem int PRIMARY KEY,
+    Status boolean,
+    Data_entrada date,
+    Data_saida date
+);
+
+CREATE TABLE Quarto (
+    ID_quarto int PRIMARY KEY,
+    Vagas_quarto int,
+    Andar int
+);
+
+CREATE TABLE possui (
+    fk_Reserva_ID_Reserva int,
+    fk_Quarto_ID_quarto int
+);
+ 
+ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_2
+    FOREIGN KEY (fk_Funcionarios_ID_Funcionario)
+    REFERENCES Funcionarios (ID_Funcionario)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_3
+    FOREIGN KEY (fk_Hospede_CPF)
+    REFERENCES Hospede (CPF)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_4
+    FOREIGN KEY (fk_Hospedagem_ID_Hospedagem)
+    REFERENCES Hospedagem (ID_Hospedagem)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE possui ADD CONSTRAINT FK_possui_1
+    FOREIGN KEY (fk_Reserva_ID_Reserva)
+    REFERENCES Reserva (ID_Reserva)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE possui ADD CONSTRAINT FK_possui_2
+    FOREIGN KEY (fk_Quarto_ID_quarto)
+    REFERENCES Quarto (ID_quarto)
+    ON DELETE SET NULL;
