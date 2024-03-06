@@ -122,7 +122,7 @@ SET tipo_reserva =
         ELSE 'Standard'
     END;
 
- ALTER TABLE funcionarios ADD PRIMARY KEY (CPF_Funcionario);
+ # ALTER TABLE funcionarios ADD PRIMARY KEY (CPF_Funcionario);
 #adiciona chave primária codigo na tabela funcionário, mas como já tem nao vai adicionar.
 
 ALTER TABLE funcionarios ADD COLUMN numero VARCHAR(15) DEFAULT '839' NOT NULL;
@@ -130,9 +130,9 @@ ALTER TABLE funcionarios ADD COLUMN numero VARCHAR(15) DEFAULT '839' NOT NULL;
 #adiciona a coluna categoria com o tipo varchar(15) e valor default 'Junior' na 
 #tabela funcionário
 
-ALTER TABLE funcionarios DROP COLUMN salario;
+ALTER TABLE funcionarios DROP COLUMN numero;
 
-#exclui a coluna sexo da tabela funcionario
+#exclui a coluna numero da tabela funcionario
 
 ALTER TABLE funcionarios MODIFY Login CHAR(25);
 #modifica o tipo da coluna categoria para char(25) na tabela funcionario
@@ -234,7 +234,7 @@ SELECT AVG(salario) AS 'Média dos Salários' FROM funcionarios;
 
 #Exemplo 50: Exibir o "Maior Preço" do produto mais caro na empresa
 
-SELECT MAX(salario) AS 'Maior Salario' FROM funcionario;
+SELECT MAX(salario) AS 'Maior Salario' FROM funcionarios;
 
 #SELECT lista de colunas FROM tabela GROUP BY coluna [HAVING condição]alter
 
